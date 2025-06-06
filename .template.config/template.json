@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "xavier",
+  "classifications": [ "WebAPI", "Camadas", "Clean Architecture" ],
+  "name": "Template Camadas WebAPI",
+  "identity": "TemplateCamadas.WebAPI",
+  "shortName": "camadasapi",
+  "sourceName": "TemplateCamadas",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  }
+}
