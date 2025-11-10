@@ -5,7 +5,7 @@ public static class WebApiConfiguration
     public static IServiceCollection AddWebApiConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllers();
-        services.AddHttpClient();
+        services.AddHealthCheckConfiguration(configuration);
 
         return services;
     }
@@ -14,22 +14,19 @@ public static class WebApiConfiguration
     {
         //app.UseDataSeeder<DatabaseContext>();
         app.UseCors("CorsPolicy");
+
+        if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+        app.UseHttpsRedirection();
         app.UseRouting();
 
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
-
-        app.UseHttpsRedirection();
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
         app.UseEndpoints(options =>
         {
+            options.UseHealthCheckCustom();
             options.MapControllers();
         });
-
 
         return app;
     }

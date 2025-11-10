@@ -1,6 +1,6 @@
 ﻿using TemplateCamadas.Domain.Interfaces;
 
-namespace TemplateCamadas.Domain.Utils;
+namespace TemplateCamadas.Domain.Services;
 
 public abstract class BaseValidationService<TReturn, TParameters> : ValidationService, IBaseValidationService<TReturn, TParameters>
 {

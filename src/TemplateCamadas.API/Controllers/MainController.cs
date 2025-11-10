@@ -2,7 +2,7 @@
 using TemplateCamadas.Domain.Interfaces;
 using TemplateCamadas.Domain.Models.Responses;
 
-namespace TemplateCamadas.Domain.Utils;
+namespace TemplateCamadas.API.Controllers;
 
 [ApiController]
 public abstract class MainController : ControllerBase

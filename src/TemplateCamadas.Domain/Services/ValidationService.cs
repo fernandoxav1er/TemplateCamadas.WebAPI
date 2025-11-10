@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using TemplateCamadas.Domain.Interfaces;
 
-namespace TemplateCamadas.Domain.Utils;
+namespace TemplateCamadas.Domain.Services;
 
 public abstract class ValidationService
 {

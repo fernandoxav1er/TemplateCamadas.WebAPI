@@ -1,12 +1,14 @@
-﻿namespace TemplateCamadas.API.Configurations;
-
-public static class SwaggerConfiguration
+﻿namespace TemplateCamadas.API.Configurations
 {
-    public static IServiceCollection AddSwaggerConfiguration(this IServiceCollection services)
+    public static class SwaggerConfiguration
     {
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        public static IServiceCollection AddSwaggerConfiguration(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddEndpointsApiExplorer();
 
-        return services;
+            services.AddSwaggerGen();
+
+            return services;
+        }
     }
 }

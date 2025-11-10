@@ -1,6 +1,6 @@
 ﻿using TemplateCamadas.Domain.Interfaces;
 
-namespace TemplateCamadas.Domain.Utils;
+namespace TemplateCamadas.Domain.Services;
 
 public class NotificationService : INotificationService
 {

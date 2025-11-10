@@ -1,0 +1,27 @@
+﻿:root {
+    --bgMain: #1f1f1f; /* background color */
+    --fcBase: #fff; /* font color */
+    --bgMenuActive: #2f2f2f; /* background color of active menu item */
+    --bcMenuActive: #5ec297; /* border color of active menu item */
+    --bgAside: var(--primaryColor); /* background color of aside */
+    --bgTable: #2f2f2f; /* background color of table */
+    --bgTableSecondary: #565252; /* secondary background color of table */
+    --primaryColor: #2f2f2f; /*primary color*/
+    --secondaryColor: #2f2f2f; /*secondary color*/
+    --bgMenuActive: #808080; /*background color of menu item when active*/
+    --bgButton: #5ec297; /*background color of button*/
+    --bgSecondary: #565252;
+}
+
+.vertical-timeline-element-content {
+    background-color: #565252 !important;
+}
+
+.tag {
+    max-width: none !important;
+    background-color: #5ec297 !important;
+    color: black !important;
+    padding: 3px !important;
+    font-size: 11px !important;
+    height: auto !important;
+}

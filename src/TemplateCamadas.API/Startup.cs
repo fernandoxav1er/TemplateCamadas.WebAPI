@@ -19,7 +19,7 @@ public class Startup
 
         services.AddDependencyInjectionConfiguration();
         services.AddWebApiConfiguration(Configuration);
-        services.AddSwaggerConfiguration();
+        services.AddSwaggerConfiguration(Configuration);
 
         services.AddCors(options =>
         {
