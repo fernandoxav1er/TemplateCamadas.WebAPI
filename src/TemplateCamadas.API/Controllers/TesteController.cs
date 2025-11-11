@@ -19,6 +19,7 @@ public class TesteController : MainController
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Get()
     {
+        await Task.Delay(2000); 
         var result = "Deu bom!";
         return CustomResponse(result);
     }
