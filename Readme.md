@@ -4,16 +4,16 @@ Este repositório contém um **template padrão de API com arquitetura em camada
 
 ---
 
-## ✅ Funcionalidades do Template
+## Funcionalidades do Template
 
 * Estrutura de camadas (API, Domain, Infrastructure)
 * Separação clara de responsabilidades
 * Suporte para injeção de dependência
-* Pronto para integração com Swagger, Entity Framework e validações
+* Pronto para integração com Swagger, Entity Framework e FluentValidation
 
 ---
 
-## 📦 Instalação do Template
+## Instalação do Template
 
 Para instalar o template localmente:
 
@@ -29,7 +29,7 @@ dotnet new -i ./caminho/do/template
 
 ---
 
-## ❌ Desinstalar o Template
+## Desinstalar o Template
 
 Caso deseje remover o template da sua máquina:
 
@@ -39,9 +39,7 @@ dotnet new -u ./
 
 ---
 
-## 🚀 Criar um novo projeto a partir do Template
-
-Após a instalação, você pode gerar um novo projeto com o seguinte comando:
+## Criar um novo projeto a partir do Template
 
 ```bash
 dotnet new camadasapi -n MeuNovoProjeto -o MeuNovoProjeto.WebAPI
@@ -52,9 +50,7 @@ dotnet new camadasapi -n MeuNovoProjeto -o MeuNovoProjeto.WebAPI
 
 ---
 
-## 🔪 Verificar se o Template foi instalado
-
-Para conferir se o template foi instalado corretamente:
+## Verificar se o Template foi instalado
 
 ```bash
 dotnet new --list
@@ -70,9 +66,7 @@ Camadas API Template      template-camadas-api  [C#]        Web/API
 
 ---
 
-## 🛠 Reinstalando o Template
-
-Se quiser atualizar ou reinstalar o template localmente, primeiro desinstale e depois instale novamente:
+## Reinstalando o Template
 
 ```bash
 dotnet new -u ./
@@ -81,20 +75,7 @@ dotnet new -i ./
 
 ---
 
-## 🗂 Estrutura do Projeto Gerado
-
-```text
-MeuNovoProjeto.WebAPI/
-├──src
-	├── MeuNovoProjeto.API/
-	├── MeuNovoProjeto.Domain/
-	└── MeuNovoProjeto.Infrastructure/
-└── MeuNovoProjeto.sln/
-```
-
----
-
-## 📄 Licença
+## Licença
 
 Este projeto está licenciado sob a [MIT License](LICENSE).
 
