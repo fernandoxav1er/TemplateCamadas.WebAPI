@@ -6,10 +6,10 @@ Este repositório contém um **template padrão de API com arquitetura em camada
 
 ## Funcionalidades do Template
 
-* Estrutura de camadas (API, Domain, Infrastructure)
-* Separação clara de responsabilidades
-* Suporte para injeção de dependência
-* Pronto para integração com Swagger, Entity Framework e FluentValidation
+- Estrutura de camadas (API, Domain, Infrastructure)
+- Separação clara de responsabilidades
+- Suporte para injeção de dependência
+- Este template são para soluções com integração com (Swagger, Entity Framework, Npgsql, FluentValidation, HealthCheck)
 
 ---
 
@@ -45,8 +45,8 @@ dotnet new -u ./
 dotnet new camadasapi -n MeuNovoProjeto -o MeuNovoProjeto.WebAPI
 ```
 
-* `-n`: Nome da solução/projeto
-* `-o`: Diretório de saída para o novo projeto
+- `-n`: Nome da solução/projeto
+- `-o`: Diretório de saída para o novo projeto
 
 ---
 
@@ -78,7 +78,3 @@ dotnet new -i ./
 ## Licença
 
 Este projeto está licenciado sob a [MIT License](LICENSE).
-
----
-
-Desenvolvido com 💻 e ☕
