@@ -9,9 +9,10 @@ public static class DIConfiguration
     public static IServiceCollection AddDependencyInjectionConfiguration(this IServiceCollection services)
     {
         services.AddHttpContextAccessor();
+
         services.AddScoped<INotificationService, NotificationService>();
         //services.AddScoped<ISqlExecutorRepository, SqlExecutorRepository>();
-        //services.AddScoped<IProcedureExecutorRepository, ProcedureExecutorRepository>();
+        //services.AddScoped(typeof(GenericRepository<>), typeof(IGenericRepository<>));
 
         return services;
     }

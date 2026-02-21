@@ -1,5 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using System.Text.RegularExpressions;
 using TemplateCamadas.Domain.Interfaces;
 
 namespace TemplateCamadas.Infrastructure.Repositories;
@@ -15,6 +17,9 @@ public class SqlExecutorRepository : ISqlExecutorRepository
 
     public async Task<List<T>> FromSqlRawAsync<T>(string procedureName, Dictionary<string, object> parameters) where T : class, new()
     {
+        if (!Regex.IsMatch(procedureName, @"^[a-zA-Z0-9_.]+$"))
+            throw new ArgumentException("Invalid procedure name");
+
         var sqlParams = parameters.Select(p => new SqlParameter(p.Key, p.Value ?? DBNull.Value)).ToArray();
 
         var sql = $"EXEC {procedureName} " + string.Join(", ", parameters.Keys.Select(k => $"@{k}"));
@@ -22,14 +27,18 @@ public class SqlExecutorRepository : ISqlExecutorRepository
         return await _context.Set<T>().FromSqlRaw(sql, sqlParams).ToListAsync();
     }
 
-    public async Task<int> ExecuteSqlRawAsync(string procedureName, Dictionary<string, object> parameters)
+    public async Task<int?> ExecuteSqlRawAsync(string procedureName, Dictionary<string, object> parameters)
     {
+        if (!Regex.IsMatch(procedureName, @"^[a-zA-Z0-9_.]+$"))
+            throw new ArgumentException("Invalid procedure name");
+
         var sqlParams = parameters.Select(p => new SqlParameter(p.Key, p.Value ?? DBNull.Value)).ToArray();
 
         var sql = $"EXEC {procedureName} " + string.Join(", ", parameters.Keys.Select(k => $"@{k}"));
 
         return await _context.Database.ExecuteSqlRawAsync(sql, sqlParams);
     }
+
     public async Task<List<T>> QuerySqlRawAsync<T>(string sql) where T : class, new()
     {
         return await _context.Set<T>().FromSqlRaw(sql).ToListAsync();
@@ -39,4 +48,6 @@ public class SqlExecutorRepository : ISqlExecutorRepository
     {
         return await _context.Database.ExecuteSqlRawAsync(sql);
     }
+
+    public async Task<IDbContextTransaction> BeginTransactionAsync() => await _context.Database.BeginTransactionAsync();
 }
