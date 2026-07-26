@@ -15,7 +15,8 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        //services.AddDbContext<DatabaseContext>();
+        //services.AddDbContext<DatabaseContext>(options =>
+        //    options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))); // requires: using Microsoft.EntityFrameworkCore;
 
         services.AddDependencyInjectionConfiguration();
         services.AddWebApiConfiguration(Configuration);

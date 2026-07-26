@@ -1,6 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
+using Npgsql;
 using System.Text.RegularExpressions;
 using TemplateCamadas.Domain.Interfaces;
 
@@ -15,14 +14,14 @@ public class SqlExecutorRepository : ISqlExecutorRepository
         _context = context;
     }
 
-    public async Task<List<T>> FromSqlRawAsync<T>(string procedureName, Dictionary<string, object> parameters) where T : class, new()
+    public async Task<List<T>> FromSqlRawAsync<T>(string functionName, Dictionary<string, object> parameters) where T : class, new()
     {
-        if (!Regex.IsMatch(procedureName, @"^[a-zA-Z0-9_.]+$"))
-            throw new ArgumentException("Invalid procedure name");
+        if (!Regex.IsMatch(functionName, @"^[a-zA-Z0-9_.]+$"))
+            throw new ArgumentException("Invalid function name");
 
-        var sqlParams = parameters.Select(p => new SqlParameter(p.Key, p.Value ?? DBNull.Value)).ToArray();
+        var sqlParams = parameters.Select(p => new NpgsqlParameter(p.Key, p.Value ?? DBNull.Value)).ToArray();
 
-        var sql = $"EXEC {procedureName} " + string.Join(", ", parameters.Keys.Select(k => $"@{k}"));
+        var sql = $"SELECT * FROM {functionName}(" + string.Join(", ", parameters.Keys.Select(k => $"@{k}")) + ")";
 
         return await _context.Set<T>().FromSqlRaw(sql, sqlParams).ToListAsync();
     }
@@ -32,9 +31,9 @@ public class SqlExecutorRepository : ISqlExecutorRepository
         if (!Regex.IsMatch(procedureName, @"^[a-zA-Z0-9_.]+$"))
             throw new ArgumentException("Invalid procedure name");
 
-        var sqlParams = parameters.Select(p => new SqlParameter(p.Key, p.Value ?? DBNull.Value)).ToArray();
+        var sqlParams = parameters.Select(p => new NpgsqlParameter(p.Key, p.Value ?? DBNull.Value)).ToArray();
 
-        var sql = $"EXEC {procedureName} " + string.Join(", ", parameters.Keys.Select(k => $"@{k}"));
+        var sql = $"CALL {procedureName}(" + string.Join(", ", parameters.Keys.Select(k => $"@{k}")) + ")";
 
         return await _context.Database.ExecuteSqlRawAsync(sql, sqlParams);
     }
@@ -49,5 +48,6 @@ public class SqlExecutorRepository : ISqlExecutorRepository
         return await _context.Database.ExecuteSqlRawAsync(sql);
     }
 
-    public async Task<IDbContextTransaction> BeginTransactionAsync() => await _context.Database.BeginTransactionAsync();
+    public async Task<ITransaction> BeginTransactionAsync()
+        => new EfTransaction(await _context.Database.BeginTransactionAsync());
 }
