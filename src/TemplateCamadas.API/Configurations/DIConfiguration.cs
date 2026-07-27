@@ -12,7 +12,7 @@ public static class DIConfiguration
 
         services.AddScoped<INotificationService, NotificationService>();
         //services.AddScoped<ISqlExecutorRepository, SqlExecutorRepository>();
-        //services.AddScoped(typeof(GenericRepository<>), typeof(IGenericRepository<>));
+        //services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
         return services;
     }

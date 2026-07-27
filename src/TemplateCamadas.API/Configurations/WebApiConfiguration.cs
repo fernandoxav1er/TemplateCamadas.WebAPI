@@ -1,4 +1,6 @@
-﻿namespace TemplateCamadas.API.Configurations;
+﻿using Asp.Versioning.ApiExplorer;
+
+namespace TemplateCamadas.API.Configurations;
 
 public static class WebApiConfiguration
 {
@@ -13,14 +15,25 @@ public static class WebApiConfiguration
     public static IApplicationBuilder UseWebApiConfiguration(this IApplicationBuilder app, IConfiguration configuration, IWebHostEnvironment env)
     {
         //app.UseDataSeeder<DatabaseContext>();
-        app.UseCors("CorsPolicy");
+        app.UseExceptionHandlerConfiguration();
+        app.UseCorsConfiguration();
 
-        if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
         app.UseHttpsRedirection();
         app.UseRouting();
 
-        app.UseSwagger();
-        app.UseSwaggerUI();
+        if (!env.IsProduction())
+        {
+            app.UseSwagger();
+
+            var provider = app.ApplicationServices.GetRequiredService<IApiVersionDescriptionProvider>();
+            app.UseSwaggerUI(options =>
+            {
+                foreach (var description in provider.ApiVersionDescriptions)
+                {
+                    options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                }
+            });
+        }
 
         app.UseEndpoints(options =>
         {

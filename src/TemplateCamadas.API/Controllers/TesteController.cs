@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using TemplateCamadas.Domain.Interfaces;
 
 namespace TemplateCamadas.API.Controllers;
 
-[Route("v1/teste")]
+[ApiVersion("1.0")]
+[Route("v{version:apiVersion}/teste")]
 public class TesteController : MainController
 {
     public TesteController(INotificationService notificationService) : base(notificationService) 
@@ -17,9 +19,8 @@ public class TesteController : MainController
         description: "Descrição teste"
     )]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<IActionResult> Get()
+    public IActionResult Get()
     {
-        await Task.Delay(2000); 
         var result = "Deu bom!";
         return CustomResponse(result);
     }

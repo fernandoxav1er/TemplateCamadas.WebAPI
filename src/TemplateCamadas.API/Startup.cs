@@ -1,4 +1,5 @@
 ﻿using TemplateCamadas.API.Configurations;
+using TemplateCamadas.Application;
 
 namespace TemplateCamadas.API;
 
@@ -16,19 +17,16 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         //services.AddDbContext<DatabaseContext>(options =>
-        //    options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))); // requires: using Microsoft.EntityFrameworkCore;
+        //options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+        //requires: using Microsoft.EntityFrameworkCore;
 
+        services.AddExceptionHandlerConfiguration();
         services.AddDependencyInjectionConfiguration();
+        services.AddApplication();
         services.AddWebApiConfiguration(Configuration);
+        services.AddApiVersioningConfiguration();
         services.AddSwaggerConfiguration(Configuration);
-
-        services.AddCors(options =>
-        {
-            options.AddPolicy("CorsPolicy", builder =>
-            {
-                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-            });
-        });
+        services.AddCorsConfiguration(Configuration);
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
