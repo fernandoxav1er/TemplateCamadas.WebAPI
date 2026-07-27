@@ -9,7 +9,7 @@ O acoplamento com o provider está isolado na camada **Infrastructure**. A camad
 | Item | Arquivo |
 | --- | --- |
 | Pacote NuGet do provider | `src/TemplateCamadas.Infrastructure/TemplateCamadas.Infrastructure.csproj` |
-| Registro do `DbContext` (`UseNpgsql`) | `src/TemplateCamadas.API/Startup.cs` |
+| Registro do `DbContext` (`UseNpgsql`) | `src/TemplateCamadas.Infrastructure/DependencyInjection.cs` (`AddInfrastructure`) |
 | Parâmetros e sintaxe SQL de procedure/function | `src/TemplateCamadas.Infrastructure/Repositories/SqlExecutorRepository.cs` |
 | String de conexão | `src/TemplateCamadas.API/appsettings.json` → `ConnectionStrings:DefaultConnection` |
 
@@ -20,7 +20,7 @@ O acoplamento com o provider está isolado na camada **Infrastructure**. A camad
    - MySQL: `Pomelo.EntityFrameworkCore.MySql`
    - SQLite: `Microsoft.EntityFrameworkCore.Sqlite`
 
-2. **Registro do `DbContext`** — em `Startup.cs`, ajuste o método de configuração:
+2. **Registro do `DbContext`** — em `Infrastructure/DependencyInjection.cs` (`AddInfrastructure`), ajuste o método de configuração:
    - PostgreSQL: `options.UseNpgsql(...)`
    - SQL Server: `options.UseSqlServer(...)`
    - MySQL: `options.UseMySql(..., ServerVersion.AutoDetect(...))`

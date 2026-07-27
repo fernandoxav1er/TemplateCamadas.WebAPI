@@ -7,7 +7,7 @@ public class ResponseBase<T> : ResponseBase
         Result = new Result();
     }
 
-    public T Data { get; set; }
+    public T? Data { get; set; }
 }
 
 public class ResponseBase
@@ -30,5 +30,5 @@ public class Result
 
     public bool Success { get; set; }
     public DateTime DateTime { get; set; }
-    public List<string> Messages { get; set; }
+    public List<string>? Messages { get; set; }
 }

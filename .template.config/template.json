@@ -18,7 +18,10 @@
 		".vs/**",
         ".gitignore",
         ".gitattributes",
+        "**/bin/**",
+        "**/obj/**",
         "Readme.md",
+        "LICENSE",
 		".template.config/**"
       ]
     }
