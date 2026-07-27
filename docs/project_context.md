@@ -21,7 +21,7 @@ Padrões vigentes:
 - Acesso a dados por `IGenericRepository<TEntity>` (CRUD) e `ISqlExecutorRepository` (procedures/functions e SQL raw).
 - Transações expostas por meio da abstração `ITransaction` (sem vazar tipos do EF).
 - Mapeamento manual por extension methods (`Mappings`), sem AutoMapper.
-- Casos de uso registrados na DI via `AddApplication()` (`Application/DependencyInjection.cs`).
+- **Registro de DI por camada**: cada camada expõe seu próprio extension method e o Startup (composition root) apenas os compõe: `AddDomain()` (`NotificationService`), `AddInfrastructure(configuration)` (`DbContext` + repositórios), `AddApplication()` (casos de uso). Concerns de API (`HttpContextAccessor`) ficam em `AddWebApiConfiguration`. Não há mais `DIConfiguration` central.
 
 ## Decisões técnicas recentes
 

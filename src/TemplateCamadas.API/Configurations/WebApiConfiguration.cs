@@ -6,6 +6,7 @@ public static class WebApiConfiguration
 {
     public static IServiceCollection AddWebApiConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddHttpContextAccessor();
         services.AddControllers();
         services.AddHealthCheckConfiguration(configuration);
 

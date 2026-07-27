@@ -1,5 +1,7 @@
 ﻿using TemplateCamadas.API.Configurations;
 using TemplateCamadas.Application;
+using TemplateCamadas.Domain;
+using TemplateCamadas.Infrastructure;
 
 namespace TemplateCamadas.API;
 
@@ -16,13 +18,12 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        //services.AddDbContext<DatabaseContext>(options =>
-        //options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-        //requires: using Microsoft.EntityFrameworkCore;
-
         services.AddExceptionHandlerConfiguration();
-        services.AddDependencyInjectionConfiguration();
+
+        services.AddDomain();
+        services.AddInfrastructure(Configuration);
         services.AddApplication();
+
         services.AddWebApiConfiguration(Configuration);
         services.AddApiVersioningConfiguration();
         services.AddSwaggerConfiguration(Configuration);
